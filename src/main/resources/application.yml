@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: local
+
+---
+
+spring:
+  profiles: local
+  devtools:
+    livereload:
+      enabled: true
+
+---
+
+spring:
+  profiles: deploy
