@@ -43,6 +43,9 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    compile group: 'net.objectlab.kit.datecalc', name: 'datecalc', version: '1.1.0', ext: 'pom'
+    compile group: 'net.objectlab.kit.datecalc', name: 'datecalc-common', version: '1.1.0'
 }
 
 test {
