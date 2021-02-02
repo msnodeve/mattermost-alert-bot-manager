@@ -45,7 +45,7 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     // 스케쥴러
-    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+    implementation("org.springframework.boot:spring-boot-starter-quartz")
 
     // 휴일계산
     implementation files('libs/icu4j-4_8_2.jar')
