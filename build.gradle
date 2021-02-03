@@ -27,7 +27,7 @@ bootJar {
     mainClassName = 'kr.co.seok.Application'
 }
 
-repositories{
+repositories {
     mavenCentral()
     jcenter()
 }
@@ -44,8 +44,10 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    // 스케쥴러
-    implementation("org.springframework.boot:spring-boot-starter-quartz")
+    // swagger2
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
 
     // 휴일계산
     implementation files('libs/icu4j-4_8_2.jar')
