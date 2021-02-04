@@ -9,6 +9,17 @@ spring:
   devtools:
     livereload:
       enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:13306/test?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: root
+
+mybatis:
+  type-aliases-package: kr.co.seok.mapper
+  mapper-locations:
+    - classpath:/mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 ---
 
