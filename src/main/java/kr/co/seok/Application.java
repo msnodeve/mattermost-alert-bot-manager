@@ -26,6 +26,7 @@ public class Application {
         for (int i = 0; i < arr.size(); i++) {
             System.out.println(arr.get(i));
         }
+
     }
 
     // 단일 쓰레드로 우선 코드 작성
