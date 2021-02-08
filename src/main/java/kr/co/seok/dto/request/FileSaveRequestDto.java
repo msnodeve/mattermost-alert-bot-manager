@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageSaveRequestDto {
+public class FileSaveRequestDto {
     private String imageUrl;
 
     public Image toEntity(){

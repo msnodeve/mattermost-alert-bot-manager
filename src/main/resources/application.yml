@@ -11,6 +11,12 @@ spring:
   devtools:
     livereload:
       enabled: true
+  file:
+    location: /var/lib/ubuntu/uploads
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 32MB
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
