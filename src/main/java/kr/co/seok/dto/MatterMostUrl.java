@@ -1,6 +1,5 @@
 package kr.co.seok.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,17 +13,15 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Image {
+public class MatterMostUrl {
     @Id
-    @Column(name = "img_id")
+    @Column(name = "url_id")
     @GeneratedValue
-    private Long imgId;
+    private Long urlId;
 
-    @Column(name = "img_url", nullable = false, length = 512)
-    private String imgUrl;
+    @Column(name = "url_alias", nullable = false, length = 128)
+    private String urlAlias;
 
-    @Builder
-    public Image(String imgUrl){
-        this.imgUrl = imgUrl;
-    }
+    @Column(name = "url", nullable = false, length = 512)
+    private String url;
 }

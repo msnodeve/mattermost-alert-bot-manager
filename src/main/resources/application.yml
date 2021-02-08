@@ -17,9 +17,10 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: update
+      ddl-auto: create
   datasource:
-    url: jdbc:mysql://mm-mysql-db:3306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+#    url: jdbc:mysql://mm-mysql-db:3306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://localhost:13306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
     username: root
     password: root
 
