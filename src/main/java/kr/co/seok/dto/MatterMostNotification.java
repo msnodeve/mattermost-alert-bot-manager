@@ -1,5 +1,6 @@
 package kr.co.seok.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,4 +24,13 @@ public class MatterMostNotification {
     @JoinColumn(name = "file_id")
     private File file;
 
+    @Builder
+    public MatterMostNotification(String message){
+        this.message = message;
+    }
+
+    @Builder MatterMostNotification(String message, File file){
+        this.message = message;
+        this.file = file;
+    }
 }

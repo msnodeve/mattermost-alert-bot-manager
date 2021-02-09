@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,6 +16,9 @@ public class MatterMostGroup{
     @Column(name = "group_id")
     @GeneratedValue
     private Long groupId;
+
+    @Column(name = "group_noti_time")
+    private Date time;
 
     @ManyToOne
     @JoinColumn(name = "url_id")
