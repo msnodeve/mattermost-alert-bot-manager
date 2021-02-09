@@ -12,7 +12,8 @@ spring:
     livereload:
       enabled: true
   file:
-    location: /var/lib/ubuntu/uploads
+#    location: /var/lib/ubuntu/uploads
+    location: ./images
   servlet:
     multipart:
       max-file-size: 32MB

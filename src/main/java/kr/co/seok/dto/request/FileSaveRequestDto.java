@@ -1,6 +1,6 @@
 package kr.co.seok.dto.request;
 
-import kr.co.seok.dto.Image;
+import kr.co.seok.dto.File;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileSaveRequestDto {
-    private String imageUrl;
+    private String fileUrl;
+    private String fileName;
 
-    public Image toEntity(){
-        return Image.builder()
-                .imgUrl(imageUrl)
+    public File toEntity(){
+        return File.builder()
+                .fileUrl(fileUrl)
+                .fileName(fileName)
                 .build();
     }
 }
