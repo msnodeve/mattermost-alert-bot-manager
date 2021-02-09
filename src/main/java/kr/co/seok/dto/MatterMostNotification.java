@@ -20,7 +20,7 @@ public class MatterMostNotification {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "img_id")
-    private Image image;
+    @JoinColumn(name = "file_id")
+    private File file;
 
 }
