@@ -1,5 +1,6 @@
 package kr.co.seok.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,4 +25,10 @@ public class MatterMostUrl {
 
     @Column(name = "url", nullable = false, length = 512)
     private String url;
+
+    @Builder
+    public MatterMostUrl(String urlAlias, String url){
+        this.urlAlias = urlAlias;
+        this.url = url;
+    }
 }
