@@ -2,24 +2,17 @@ package kr.co.seok.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kr.co.seok.dto.File;
 import kr.co.seok.dto.response.CommonResponse;
 import kr.co.seok.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Api(value = "Image-Controller", description = "This is image controller capable of CRUD")
-@RestController(value = "/api/v1/file")
+@RequestMapping(value = "/api/v1/file")
+@RestController
 public class FileController {
     @Autowired
     private FileService fileService;
@@ -41,11 +34,12 @@ public class FileController {
         return response;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<CommonResponse> getFiles(@RequestParam String searchText) {
+    @GetMapping()
+    public ResponseEntity<CommonResponse> getFiles(@RequestParam(required = false) String searchText) {
         ResponseEntity<CommonResponse> response;
         final CommonResponse result = new CommonResponse();
         try{
+            searchText = searchText == null ? "" : searchText;
             result.result = fileService.loadAll(searchText);
             result.msg = "ok";
             response = new ResponseEntity<>(result, HttpStatus.OK);

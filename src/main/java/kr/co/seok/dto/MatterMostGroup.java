@@ -1,10 +1,12 @@
 package kr.co.seok.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -16,6 +18,9 @@ public class MatterMostGroup{
     @GeneratedValue
     private Long groupId;
 
+    @Column(name = "group_noti_time")
+    private String time;
+
     @ManyToOne
     @JoinColumn(name = "url_id")
     private MatterMostUrl matterMostUrl;
@@ -23,4 +28,11 @@ public class MatterMostGroup{
     @ManyToOne
     @JoinColumn(name = "noti_id")
     private MatterMostNotification matterMostNotification;
+
+    @Builder
+    public MatterMostGroup(MatterMostUrl matterMostUrl, MatterMostNotification matterMostNotification, String time){
+        this.matterMostUrl = matterMostUrl;
+        this.matterMostNotification = matterMostNotification;
+        this.time = time;
+    }
 }
