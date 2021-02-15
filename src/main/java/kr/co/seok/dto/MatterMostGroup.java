@@ -1,16 +1,13 @@
 package kr.co.seok.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class MatterMostGroup{
     @Id
