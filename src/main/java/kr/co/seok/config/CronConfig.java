@@ -1,6 +1,5 @@
 package kr.co.seok.config;
 
-import com.ibm.icu.util.Calendar;
 import kr.co.seok.dto.MatterMostGroup;
 import kr.co.seok.retrofit.RetrofitClient;
 import kr.co.seok.retrofit.dto.Attachments;
@@ -24,10 +23,7 @@ import retrofit2.Response;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Component
 public class CronConfig {
@@ -55,6 +51,7 @@ public class CronConfig {
     @SneakyThrows
     @PostConstruct
     public void onStartup() {
+        matterMostGroupLists = groupService.loadAll("");
         dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         date = new Date(dateTimeFormatter.format(LocalDateTime.now()));
         calendar = Calendar.getInstance(Locale.KOREA);
@@ -97,8 +94,8 @@ public class CronConfig {
                     attachments.setText(matterMostGroup.getMatterMostNotification().getMessage());
 //                    attachments.setImage_url("http://t4coach33.p.ssafy.io/images/6.gif");
                     matterMostRequestDto.setAttachments(matterMostRequestDto.getAttachments());
-                    Call<String> sendMess = RetrofitClient.getSendMessageService().sendMessage(matterMostGroup.getMatterMostUrl().getUrl(), matterMostRequestDto);
-                    sendMess.enqueue(new Callback<String>() {
+                    Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostGroup.getMatterMostUrl().getUrl(), matterMostRequestDto);
+                    sendMessageCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             logger.info(this.getClass().toString() + " >>> " + response.body());

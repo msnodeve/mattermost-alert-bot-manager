@@ -6,6 +6,7 @@ import kr.co.seok.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -27,5 +28,9 @@ public class UrlService {
         matterMostUrl.setUrlAlias(urlSaveRequestDto.getUrlAlias());
         matterMostUrl.setUrlId(id);
         return urlRepository.save(matterMostUrl);
+    }
+
+    public List<MatterMostUrl> findByUrlIds(Long[] urlIds) {
+        return urlRepository.findByUrlIdIn(Arrays.asList(urlIds));
     }
 }

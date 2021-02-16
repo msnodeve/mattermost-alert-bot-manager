@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface UrlRepository extends JpaRepository<MatterMostUrl, Long> {
     List<MatterMostUrl> findByUrlAliasContains(String urlName) throws Exception;
+
+    List<MatterMostUrl> findByUrlIdIn(List<Long> ids);
 }
