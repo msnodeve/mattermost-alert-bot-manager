@@ -3,7 +3,8 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: deploy
+
 ---
 
 spring:
@@ -12,7 +13,6 @@ spring:
     livereload:
       enabled: true
   file:
-#    location: /var/lib/ubuntu/uploads
     location: ./images
   servlet:
     multipart:
@@ -26,19 +26,33 @@ spring:
       format_sql: true
       ddl-auto: update
   datasource:
-#    url: jdbc:mysql://mm-mysql-db:3306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
     url: jdbc:mysql://localhost:13306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
     username: root
     password: root
-
-mybatis:
-  type-aliases-package: kr.co.seok.mapper
-  mapper-locations:
-    - classpath:/mapper/**/*Mapper.xml
-  configuration:
-    map-underscore-to-camel-case: true
 
 ---
 
 spring:
   profiles: deploy
+  devtools:
+    livereload:
+      enabled: true
+  file:
+    location: ./images
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 32MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://mm-mysql-db:3306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: test
+    password: test
+
+---
