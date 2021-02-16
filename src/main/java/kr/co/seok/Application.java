@@ -18,15 +18,6 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-
-        System.out.println("Calendar.SUNDAY : " + Calendar.SUNDAY);
-        System.out.println("Calendar.SATURDAY : " + Calendar.SATURDAY);
-
-        ArrayList<Holidays> arr = LunarCalendar.holidayArray("2021");
-        for (int i = 0; i < arr.size(); i++) {
-            System.out.println(arr.get(i));
-        }
-
     }
 
     // 단일 쓰레드로 우선 코드 작성

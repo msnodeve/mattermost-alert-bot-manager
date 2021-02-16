@@ -51,6 +51,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.1'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 
+    // retrofit
+    compile group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.5.0'
+    // converter-gson
+    compile group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.5.0'
+
     // 휴일계산
     implementation files('libs/icu4j-4_8_2.jar')
 
