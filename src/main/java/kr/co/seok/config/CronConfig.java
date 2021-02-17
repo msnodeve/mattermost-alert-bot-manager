@@ -86,7 +86,7 @@ public class CronConfig {
     @Scheduled(cron = "20 * * * * *")
     public void sendMessage() {
         if (!isHolyDay()) {
-            String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            String time = (calendar.get(Calendar.HOUR_OF_DAY) + 9) + ":" + calendar.get(Calendar.MINUTE);
             for (MatterMostGroup matterMostGroup : matterMostGroupLists) {
                 if (matterMostGroup.getTime().equals(time)) {
                     MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
