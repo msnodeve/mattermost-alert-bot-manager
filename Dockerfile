@@ -1,5 +1,7 @@
 FROM openjdk:8-jdk-alpine
 
+RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
 VOLUME /tmp
 
 EXPOSE 8080

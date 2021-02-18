@@ -86,13 +86,13 @@ public class CronConfig {
     @Scheduled(cron = "20 * * * * *")
     public void sendMessage() {
         if (!isHolyDay()) {
-            String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            String time = String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", calendar.get(Calendar.MINUTE));
             for (MatterMostGroup matterMostGroup : matterMostGroupLists) {
                 if (matterMostGroup.getTime().equals(time)) {
                     MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
                     Attachments attachments = matterMostRequestDto.getAttachments()[0];
                     attachments.setText(matterMostGroup.getMatterMostNotification().getMessage());
-//                    attachments.setImage_url("http://t4coach33.p.ssafy.io/images/6.gif");
+                    //attachments.setImage_url("http://t4coach33.p.ssafy.io/images/6.gif");
                     matterMostRequestDto.setAttachments(matterMostRequestDto.getAttachments());
                     Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostGroup.getMatterMostUrl().getUrl(), matterMostRequestDto);
                     sendMessageCall.enqueue(new Callback<String>() {
