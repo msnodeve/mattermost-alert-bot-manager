@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @Api(value = "Group-Controller", description = "This is MatterMost Notification Group controller capable of CRUD")
 @RequestMapping(value = "/api/v1/group")
 @RestController

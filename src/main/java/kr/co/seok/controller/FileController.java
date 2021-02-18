@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin("*")
 @Api(value = "Image-Controller", description = "This is image controller capable of CRUD")
 @RequestMapping(value = "/api/v1/file")
 @RestController
