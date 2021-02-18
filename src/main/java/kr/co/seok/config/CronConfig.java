@@ -85,9 +85,9 @@ public class CronConfig {
     @SneakyThrows
     @Scheduled(cron = "20 * * * * *")
     public void sendMessage() {
-        String time = (calendar.get(Calendar.HOUR_OF_DAY) + 9) + ":" + calendar.get(Calendar.MINUTE);
-        System.out.println(time);
         if (!isHolyDay()) {
+            String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            logger.info(time);
             for (MatterMostGroup matterMostGroup : matterMostGroupLists) {
                 logger.info(matterMostGroup.toString());
                 if (matterMostGroup.getTime().equals(time)) {
