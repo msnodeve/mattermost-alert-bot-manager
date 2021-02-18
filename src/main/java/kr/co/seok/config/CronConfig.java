@@ -87,7 +87,9 @@ public class CronConfig {
     public void sendMessage() {
         if (!isHolyDay()) {
             String time = (calendar.get(Calendar.HOUR_OF_DAY) + 9) + ":" + calendar.get(Calendar.MINUTE);
+            logger.info(time);
             for (MatterMostGroup matterMostGroup : matterMostGroupLists) {
+                logger.info(matterMostGroup.toString());
                 if (matterMostGroup.getTime().equals(time)) {
                     MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
                     Attachments attachments = matterMostRequestDto.getAttachments()[0];
