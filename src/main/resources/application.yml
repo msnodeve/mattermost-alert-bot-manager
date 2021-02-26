@@ -52,7 +52,7 @@ spring:
       ddl-auto: update
   datasource:
     url: jdbc:mysql://mm-mysql-db:3306/mm-alert-db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
-    username: ${MYSQL_USERNAME}
+    username: root
     password: ${MYSQL_PASSWORD}
 
 ---
