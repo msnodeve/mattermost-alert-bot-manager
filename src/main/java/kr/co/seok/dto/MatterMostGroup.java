@@ -9,13 +9,18 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(
+                columnNames = {"group_noti_time", "url_id"}
+        )
+})
 public class MatterMostGroup{
     @Id
     @Column(name = "group_id")
     @GeneratedValue
     private Long groupId;
 
-    @Column(name = "group_noti_time")
+    @Column(name = "group_noti_time", nullable = false)
     private String time;
 
     @ManyToOne
