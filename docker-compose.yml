@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  db:
+    image: mm-mysql-db
+    container_name: mm-mysql-db
+    restart: always
+    build:
+      context: ./init
+      dockerfile: ./mysql.Dockerfile
+    volumes:
+      - "mysql_data:/var/lib/mysql"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 13306:3306
+    networks:
+      - mm-network
+
+  spring:
+    image: mm-spring-back
+    container_name: mm-spring-back
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - 18080:8080
+    networks:
+      - mm-network
+
+
+
+volumes:
+  mysql_data:
+
+networks:
+  mm-network:
+    driver: bridge
