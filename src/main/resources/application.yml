@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: deploy
+
+---
+
+spring:
+  profiles: local
+  devtools:
+    livereload:
+      enabled: true
+  file:
+    location: ./images
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 32MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:13306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+---
+
+spring:
+  profiles: deploy
+  devtools:
+    livereload:
+      enabled: true
+  file:
+    location: /home/ubunut/images/alert
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 32MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://mm-mysql-db:3306/mm_alert_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: mm_alert_pw
+
+---
