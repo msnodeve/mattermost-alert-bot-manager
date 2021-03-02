@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin("*")
 @Api(value = "Image-Controller", description = "This is image controller capable of CRUD")
-@RequestMapping(value = "/api/v1/file")
+@RequestMapping(value = "/v1/file")
 @RestController
 public class FileController {
     @Autowired
