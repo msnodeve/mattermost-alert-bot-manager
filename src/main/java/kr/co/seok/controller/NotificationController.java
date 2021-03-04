@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kr.co.seok.dto.request.NotificationSaveRequestDto;
 import kr.co.seok.dto.request.NotificationUpdateRequestDto;
-import kr.co.seok.dto.request.UrlSaveRequestDto;
 import kr.co.seok.dto.response.CommonResponse;
 import kr.co.seok.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @Api(value = "Notification-Controller", description = "This is MatterMost Notification controller capable of CRUD")
-@RequestMapping(value = "/v1/noti")
+@RequestMapping(value = "/api/v1/noti")
 @RestController
 public class NotificationController {
     @Autowired

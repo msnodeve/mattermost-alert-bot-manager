@@ -2,16 +2,18 @@ package kr.co.seok.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(
+                columnNames = {"url"}
+        )
+})
 public class MatterMostUrl {
     @Id
     @Column(name = "url_id")
@@ -21,7 +23,7 @@ public class MatterMostUrl {
     @Column(name = "url_alias", nullable = false, length = 128)
     private String urlAlias;
 
-    @Column(name = "url", nullable = false, length = 512)
+    @Column(name = "url", nullable = false, length = 254)
     private String url;
 
     @Builder

@@ -16,7 +16,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("t4coach33.p.ssafy.io/api")
+//                .host("t4coach33.p.ssafy.io/api")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("kr.co.seok"))
