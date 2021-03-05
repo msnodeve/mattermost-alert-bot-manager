@@ -18,9 +18,14 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(memberSaveRequestDto.toEntity());
     }
 
+    public UserDetails loadUserById(String memberId) throws UsernameNotFoundException {
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        return memberRepository.findById(userId)
+    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+        return memberRepository.findByMemberId(Long.parseLong(memberId))
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
     }
 }

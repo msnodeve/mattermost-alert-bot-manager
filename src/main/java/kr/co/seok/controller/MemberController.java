@@ -51,10 +51,10 @@ public class MemberController {
         ResponseEntity<CommonResponse> response;
         final CommonResponse result = new CommonResponse();
         try {
-            Member member = (Member) memberService.loadUserByUsername(loginDto.get("id"));
+            Member member = (Member) memberService.loadUserById(loginDto.get("id"));
             System.out.println(member.toString());
             if(passwordEncoder.matches(loginDto.get("password"), member.getPassword())){
-                result.result = jwtTokenProvider.createToken(member.getId(), member.getRoles());
+                result.result = jwtTokenProvider.createToken(member.getMemberId().toString(), member.getRoles());
                 result.msg = "created";
                 response = new ResponseEntity<>(result, HttpStatus.CREATED);
             }else{

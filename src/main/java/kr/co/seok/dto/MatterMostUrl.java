@@ -26,9 +26,14 @@ public class MatterMostUrl {
     @Column(name = "url", nullable = false, length = 254)
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     @Builder
-    public MatterMostUrl(String urlAlias, String url){
+    public MatterMostUrl(String urlAlias, String url, Member member){
         this.urlAlias = urlAlias;
         this.url = url;
+        this.member = member;
     }
 }

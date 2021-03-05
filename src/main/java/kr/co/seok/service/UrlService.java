@@ -33,4 +33,12 @@ public class UrlService {
     public List<MatterMostUrl> findByUrlIds(Long[] urlIds) {
         return urlRepository.findByUrlIdIn(Arrays.asList(urlIds));
     }
+
+    public MatterMostUrl findById(Long urlId) throws Exception{
+        return urlRepository.findById(urlId).orElseThrow(()-> new Exception("해당되는 URL 이 없습니다."));
+    }
+
+    public void deleteById(Long urlId) {
+        urlRepository.deleteById(urlId);
+    }
 }
