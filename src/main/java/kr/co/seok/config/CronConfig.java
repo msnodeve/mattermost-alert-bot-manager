@@ -2,7 +2,6 @@ package kr.co.seok.config;
 
 import kr.co.seok.dto.MatterMostGroup;
 import kr.co.seok.retrofit.RetrofitClient;
-import kr.co.seok.retrofit.dto.Attachments;
 import kr.co.seok.retrofit.dto.MatterMostRequestDto;
 import kr.co.seok.service.FileService;
 import kr.co.seok.service.GroupService;
@@ -89,12 +88,15 @@ public class CronConfig {
             String time = String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", calendar.get(Calendar.MINUTE));
             for (MatterMostGroup matterMostGroup : matterMostGroupLists) {
                 if (matterMostGroup.getTime().equals(time)) {
+                    Map<String, List<MatterMostRequestDto>> attachments = new HashMap<>();
+                    attachments.put("attachments", new ArrayList<>());
                     MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
-                    Attachments attachments = matterMostRequestDto.getAttachments()[0];
-                    attachments.setText(matterMostGroup.getMatterMostNotification().getMessage());
-                    //attachments.setImage_url("http://t4coach33.p.ssafy.io/images/6.gif");
-                    matterMostRequestDto.setAttachments(matterMostRequestDto.getAttachments());
-                    Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostGroup.getMatterMostUrl().getUrl(), matterMostRequestDto);
+                    matterMostRequestDto.setText(matterMostGroup.getMatterMostNotification().getMessage());
+                    if(matterMostGroup.getMatterMostNotification().getFile() != null){
+                        matterMostRequestDto.setImageUrl(matterMostGroup.getMatterMostNotification().getFile().getFileUrl());
+                    }
+                    attachments.get("attachments").add(matterMostRequestDto);
+                    Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostGroup.getMatterMostUrl().getUrl(), attachments);
                     sendMessageCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {

@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import kr.co.seok.dto.MatterMostUrl;
 import kr.co.seok.dto.response.CommonResponse;
 import kr.co.seok.retrofit.RetrofitClient;
-import kr.co.seok.retrofit.dto.Attachments;
 import kr.co.seok.retrofit.dto.MatterMostRequestDto;
 import kr.co.seok.service.UrlService;
 import org.slf4j.Logger;
@@ -18,7 +17,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @Api(value = "One-Time-Notification-Controller", description = "This is MatterMost Direct Notification controller")
@@ -32,15 +34,15 @@ public class OneTimeNotificationController {
 
     @PostMapping()
     @ApiOperation(value = "send direct message")
-    public ResponseEntity<CommonResponse> sendMessage(@RequestParam Long[] urlIds, @RequestParam String message){
+    public ResponseEntity<CommonResponse> sendMessage(@RequestParam Long[] urlIds, @RequestBody MatterMostRequestDto matterMostRequestDto) {
         ResponseEntity<CommonResponse> response;
         final CommonResponse result = new CommonResponse();
-        try{
-            send(urlIds, message);
+        try {
+            send(urlIds, matterMostRequestDto);
             result.result = "메세지 전송 성공";
             result.msg = "ok";
             response = new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             result.result = e.getMessage();
             result.msg = "error";
             response = new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,14 +50,13 @@ public class OneTimeNotificationController {
         return response;
     }
 
-    private void send(Long[] urlIds, String message){
+    private void send(Long[] urlIds, MatterMostRequestDto matterMostRequestDto) {
         List<MatterMostUrl> matterMostUrls = urlService.findByUrlIds(urlIds);
-        for(MatterMostUrl matterMostUrl : matterMostUrls){
-            MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
-            Attachments attachments = matterMostRequestDto.getAttachments()[0];
-            attachments.setText(message);
-            matterMostRequestDto.setAttachments(matterMostRequestDto.getAttachments());
-            Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostUrl.getUrl(), matterMostRequestDto);
+        for (MatterMostUrl matterMostUrl : matterMostUrls) {
+            Map<String, List<MatterMostRequestDto>> attachments = new HashMap<>();
+            attachments.put("attachments", new ArrayList<>());
+            attachments.get("attachments").add(matterMostRequestDto);
+            Call<String> sendMessageCall = RetrofitClient.getSendMessageService().sendMessage(matterMostUrl.getUrl(), attachments);
             sendMessageCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
