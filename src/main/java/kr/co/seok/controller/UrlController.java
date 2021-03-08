@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @Api(value = "Url-Controller", description = "This is MatterMost Url controller capable of CRUD")
-@RequestMapping(value = "api/v1/url")
+@RequestMapping(value = "/v1/url")
 @RestController
 public class UrlController {
     @Autowired
