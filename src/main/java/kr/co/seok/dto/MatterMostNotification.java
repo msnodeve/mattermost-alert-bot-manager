@@ -1,6 +1,8 @@
 package kr.co.seok.dto;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -22,13 +24,14 @@ public class MatterMostNotification {
     @JoinColumn(name = "file_id")
     private File file;
 
-    @Builder
-    public MatterMostNotification(String message){
-        this.message = message;
-    }
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Member member;
 
-    @Builder MatterMostNotification(String message, File file){
+    @Builder MatterMostNotification(String message, File file, Member member){
         this.message = message;
         this.file = file;
+        this.member = member;
     }
 }

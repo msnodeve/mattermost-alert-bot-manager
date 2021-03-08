@@ -1,5 +1,6 @@
 package kr.co.seok.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -18,9 +19,11 @@ public class File {
     @GeneratedValue
     private Long fileId;
 
+    @ApiModelProperty(hidden=true)
     @Column(name = "file_url", nullable = false, length = 512)
     private String fileUrl;
 
+    @ApiModelProperty(hidden=true)
     @Column(name = "file_name", nullable = false, length = 512)
     private String fileName;
 
