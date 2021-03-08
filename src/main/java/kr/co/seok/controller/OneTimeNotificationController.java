@@ -24,7 +24,7 @@ import java.util.Map;
 
 @CrossOrigin("*")
 @Api(value = "One-Time-Notification-Controller", description = "This is MatterMost Direct Notification controller")
-@RequestMapping(value = "/v1/one-time")
+@RequestMapping(value = "/api/v1/one-time")
 @RestController
 public class OneTimeNotificationController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
