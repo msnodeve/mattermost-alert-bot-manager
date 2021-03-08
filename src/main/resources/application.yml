@@ -45,7 +45,7 @@ spring:
     livereload:
       enabled: true
   file:
-    location: /home/ubunut/images/alert
+    location: ./
   servlet:
     multipart:
       max-file-size: 32MB
