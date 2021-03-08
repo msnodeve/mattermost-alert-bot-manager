@@ -17,7 +17,7 @@ import java.util.Map;
 
 @CrossOrigin("*")
 @Api(value = "Member-Controller")
-@RequestMapping(value = "/api/v1/member")
+@RequestMapping(value = "api/v1/member")
 @RestController
 public class MemberController {
 
