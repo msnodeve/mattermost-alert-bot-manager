@@ -1,8 +1,11 @@
 package kr.co.seok.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import kr.co.seok.dto.MatterMostUrl;
+import kr.co.seok.dto.Member;
 import kr.co.seok.dto.response.CommonResponse;
 import kr.co.seok.retrofit.RetrofitClient;
 import kr.co.seok.retrofit.dto.MatterMostRequestDto;
@@ -34,7 +37,9 @@ public class OneTimeNotificationController {
 
     @PostMapping()
     @ApiOperation(value = "send direct message")
-    public ResponseEntity<CommonResponse> sendMessage(@RequestParam Long[] urlIds, @RequestBody MatterMostRequestDto matterMostRequestDto) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")})
+    public ResponseEntity<CommonResponse> sendMessage(@RequestHeader(value = "X-AUTH-TOKEN") String token, @RequestParam Long[] urlIds, @RequestBody MatterMostRequestDto matterMostRequestDto) {
         ResponseEntity<CommonResponse> response;
         final CommonResponse result = new CommonResponse();
         try {
