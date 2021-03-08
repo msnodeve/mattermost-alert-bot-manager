@@ -70,6 +70,8 @@ public class NotificationController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "update notification")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")})
     public ResponseEntity<CommonResponse> updateNotification(@RequestHeader(value = "X-AUTH-TOKEN") String token, @PathVariable Long id, @RequestBody NotificationUpdateRequestDto notificationUpdateRequestDto) {
         ResponseEntity<CommonResponse> response;
         final CommonResponse result = new CommonResponse();
@@ -94,7 +96,7 @@ public class NotificationController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "delete Noti")
+    @ApiOperation(value = "delete notification")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")})
     public ResponseEntity<CommonResponse> deleteNotification(@RequestHeader(value = "X-AUTH-TOKEN") String token, @PathVariable Long id) {

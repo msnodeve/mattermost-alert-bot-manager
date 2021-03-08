@@ -29,6 +29,7 @@ public class File {
     @ManyToOne
     @JoinColumn(name = "member_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @ApiModelProperty(hidden=true)
     private Member member;
 
     @Builder

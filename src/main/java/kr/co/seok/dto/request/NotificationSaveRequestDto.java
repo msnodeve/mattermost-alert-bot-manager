@@ -20,7 +20,6 @@ public class NotificationSaveRequestDto {
     @ApiModelProperty(hidden=true)
     private Member member;
 
-
     public MatterMostNotification toEntity(){
         return MatterMostNotification.builder()
                 .message(message)
