@@ -15,7 +15,7 @@ public class NotificationService {
     private NotificationRepository notificationRepository;
 
     public MatterMostNotification save(NotificationSaveRequestDto notificationSaveRequestDto) {
-        return notificationRepository.save(notificationSaveRequestDto.toEntityNoFile());
+        return notificationRepository.save(notificationSaveRequestDto.toEntity());
     }
 
     public List<MatterMostNotification> loadAll(String message) throws Exception {
@@ -27,5 +27,13 @@ public class NotificationService {
         matterMostNotification.setFile(notificationUpdateRequestDto.getFile());
         matterMostNotification.setMessage(notificationUpdateRequestDto.getMessage());
         return notificationRepository.save(matterMostNotification);
+    }
+
+    public MatterMostNotification findById(Long id) throws Exception{
+        return notificationRepository.findById(id).orElseThrow(()-> new Exception("해당되는 Noti 가 없습니다."));
+    }
+
+    public void deleteById(Long id){
+        notificationRepository.deleteById(id);
     }
 }

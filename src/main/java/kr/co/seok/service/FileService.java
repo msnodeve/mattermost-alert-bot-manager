@@ -1,6 +1,7 @@
 package kr.co.seok.service;
 
 import kr.co.seok.dto.File;
+import kr.co.seok.dto.Member;
 import kr.co.seok.dto.request.FileSaveRequestDto;
 import kr.co.seok.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class FileService {
         }
     }
 
-    public String save(MultipartFile file) {
+    public String save(MultipartFile file, Member member) {
         String result = null;
         try {
             int pos = file.getOriginalFilename().lastIndexOf(".");
@@ -43,7 +44,7 @@ public class FileService {
             String fileName = file.getOriginalFilename().substring(0, pos);
             result = UUID.randomUUID() + "~" + fileName + format;
             Files.copy(file.getInputStream(), Paths.get(filePath).resolve(result));
-            File saveFile = fileRepository.save(new FileSaveRequestDto(Paths.get(filePath).toString(), result).toEntity());
+            File saveFile = fileRepository.save(new FileSaveRequestDto(Paths.get(filePath).toString(), result, member).toEntity());
             result = saveFile.getFileName();
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());

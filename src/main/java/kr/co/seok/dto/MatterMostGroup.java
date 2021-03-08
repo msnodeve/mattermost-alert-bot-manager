@@ -1,6 +1,8 @@
 package kr.co.seok.dto;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -31,10 +33,16 @@ public class MatterMostGroup{
     @JoinColumn(name = "noti_id")
     private MatterMostNotification matterMostNotification;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Member member;
+
     @Builder
-    public MatterMostGroup(MatterMostUrl matterMostUrl, MatterMostNotification matterMostNotification, String time){
+    public MatterMostGroup(MatterMostUrl matterMostUrl, MatterMostNotification matterMostNotification, String time, Member member){
         this.matterMostUrl = matterMostUrl;
         this.matterMostNotification = matterMostNotification;
         this.time = time;
+        this.member = member;
     }
 }

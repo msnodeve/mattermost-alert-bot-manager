@@ -3,6 +3,7 @@ package kr.co.seok.service;
 import kr.co.seok.dto.MatterMostGroup;
 import kr.co.seok.dto.MatterMostNotification;
 import kr.co.seok.dto.MatterMostUrl;
+import kr.co.seok.dto.Member;
 import kr.co.seok.repository.GroupRepository;
 import kr.co.seok.repository.NotificationRepository;
 import kr.co.seok.repository.UrlRepository;
@@ -22,7 +23,7 @@ public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public MatterMostGroup save(Long urlId, Long notiId, String time) throws Exception {
+    public MatterMostGroup save(Long urlId, Long notiId, String time, Member member) throws Exception {
         MatterMostUrl matterMostUrl = urlRepository.findById(urlId).orElseThrow(() -> new Exception("등록된 URL 이 없습니다."));
         MatterMostNotification matterMostNotification = notificationRepository.findById(notiId).orElseThrow(() -> new Exception("등록된 Notification 이 없습니다."));
 
@@ -30,6 +31,7 @@ public class GroupService {
                 .matterMostUrl(matterMostUrl)
                 .matterMostNotification(matterMostNotification)
                 .time(time)
+                .member(member)
                 .build();
 
         return groupRepository.save(matterMostGroup);
@@ -47,5 +49,13 @@ public class GroupService {
         matterMostGroup.setMatterMostUrl(matterMostUrl);
         matterMostGroup.setTime(time);
         return groupRepository.save(matterMostGroup);
+    }
+
+    public MatterMostGroup findById(Long id) throws Exception{
+        return groupRepository.findById(id).orElseThrow(() -> new Exception("해당되는 Group 이 없습니다."));
+    }
+
+    public void deleteById(Long id){
+        groupRepository.deleteById(id);
     }
 }
