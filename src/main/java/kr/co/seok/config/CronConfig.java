@@ -92,7 +92,7 @@ public class CronConfig {
                     attachments.put("attachments", new ArrayList<>());
                     MatterMostRequestDto matterMostRequestDto = new MatterMostRequestDto();
                     matterMostRequestDto.setText(matterMostGroup.getMatterMostNotification().getMessage());
-                    if(matterMostGroup.getMatterMostNotification().getFile() != null){
+                    if (matterMostGroup.getMatterMostNotification().getFile() != null) {
                         matterMostRequestDto.setImageUrl(matterMostGroup.getMatterMostNotification().getFile().getFileUrl());
                     }
                     attachments.get("attachments").add(matterMostRequestDto);
@@ -116,13 +116,13 @@ public class CronConfig {
     private boolean isHolyDay() {
         date = new Date(dateTimeFormatter.format(LocalDateTime.now()));
         calendar.setTime(date);
-        String todayDate = calendar.get(Calendar.YEAR) + String.format("%02d", calendar.get(Calendar.MONTH)) + String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH));
+        String todayDate = calendar.get(Calendar.YEAR) + String.format("%02d", calendar.get(Calendar.MONTH) + 1) + String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH));
         for (Holidays holiday : holidays) {
             String holidayDate = holiday.getYear() + holiday.getDate();
             if (holidayDate.equals(todayDate)) {
                 return true;
             }
         }
-        return calendar.get(Calendar.DAY_OF_WEEK) == 1 || calendar.get(Calendar.DAY_OF_WEEK) == 7;
+        return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY;
     }
 }
