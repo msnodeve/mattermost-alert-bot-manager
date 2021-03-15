@@ -1,8 +1,9 @@
 FROM openjdk:8-jdk-alpine
 
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+RUN mkdir images
 
-VOLUME /tmp
+VOLUME ["/tmp", "/images"]
 
 EXPOSE 8080
 
