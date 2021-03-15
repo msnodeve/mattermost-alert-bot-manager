@@ -31,7 +31,8 @@ services:
       - 18080:8080
     networks:
       - mm-network
-
+    volumes:
+      - /home/ubuntu/images/alert:/images
 
 
 volumes:
