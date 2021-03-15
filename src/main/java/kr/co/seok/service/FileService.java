@@ -25,6 +25,10 @@ public class FileService {
     @Value("${spring.file.location}")
     private String filePath;
 
+    @Value("${spring.file.upload.location}")
+    private String realPath;
+
+
     @Autowired
     private FileRepository fileRepository;
 
@@ -44,7 +48,7 @@ public class FileService {
             String fileName = file.getOriginalFilename().substring(0, pos);
             result = UUID.randomUUID() + "~" + fileName + format;
             Files.copy(file.getInputStream(), Paths.get(filePath).resolve(result));
-            File saveFile = fileRepository.save(new FileSaveRequestDto(Paths.get(filePath).toString(), result, member).toEntity());
+            File saveFile = fileRepository.save(new FileSaveRequestDto(realPath, result, member).toEntity());
             result = saveFile.getFileName();
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
